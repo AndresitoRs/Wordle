@@ -15,8 +15,9 @@ import java.util.ResourceBundle;
 
 public class WordleController implements Initializable {
 
+    @FXML
+    Resultado info;
     private final String palabraOculta = "Caleb";
-
     private int filaActual = 1;
     private Label casillaSeleccionada;
     @FXML
@@ -88,6 +89,7 @@ public class WordleController implements Initializable {
         casillaSeleccionada=i1l1;
         casillaSeleccionada.getStyleClass().add("activa");
         iniciarPartida();
+        info.ganar();
     }
 
     public void desmarcarTodas() {
@@ -166,10 +168,8 @@ public class WordleController implements Initializable {
             int col = Integer.parseInt(id.substring(3));
             col--;
             if (col < 1) {
-                // No permitimos retroceder más allá de la primera columna de la fila actual, asi que no hace absolutamente nada, xd
                 col = 1;
             }
-            // Verifica que los valores de fila y col son válidos
             if (fila >= 1 && col >= 1) {
                 String nuevoId = "i" + fila + "l" + col;
                 for (Node node : tablero.getChildren()) {
