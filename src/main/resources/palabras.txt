@@ -1,10 +1,10 @@
 pluma hojas perro 
-flores carro verde 
-blanco cielo suelo 
+flora carro verde
+negro cielo suelo
 marco radio crema 
 fotos voces botas 
 avion papel cinta 
-metal piedra reloj 
+metal reloj coche
 carta barco salsa 
 queso dulce golfo 
 herir sopas perla 
@@ -12,3 +12,8 @@ coral lente fruto
 menta justo piano 
 molde techo rubio 
 sueño ramas barco
+shawn caleb reina
+nelly blaze evans
+torch bryce byron
+
+

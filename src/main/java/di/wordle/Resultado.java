@@ -24,15 +24,16 @@ public class Resultado extends AnchorPane {
         }
     }
 
-    public void ganar(){
-        Image img = new Image(getClass().getResourceAsStream("tuganas.png"));
+    public void ganar() {
+        Image img = new Image(getClass().getResourceAsStream("/img/tuganas.png"));
         controlador.getImagen().setImage(img);
     }
 
-    public void perder(){
-        Image img = new Image(getClass().getResourceAsStream("juegoterminado.png"));
+    public void perder() {
+        Image img = new Image(getClass().getResourceAsStream("/img/juegoterminado.png"));
         controlador.getImagen().setImage(img);
     }
+
 
     public void limpiar(){
         controlador.getImagen().setImage(null);

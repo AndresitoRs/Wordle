@@ -27,7 +27,8 @@ public class WordleController implements Initializable {
     @FXML
     private GridPane tablero;
     @FXML
-    Label i1l1, i1l2, i1l3, i1l4 ,i1l5, i2l1, i2l2, i2l3, i2l4, i2l5, i3l1, i3l2, i3l3, i3l4, i3l5, i4l1, i4l2, i4l3, i4l4, i4l5, i5l1, i5l2, i5l3, i5l4, i5l5;
+    Label i1l1, i1l2, i1l3, i1l4, i1l5, i2l1, i2l2, i2l3, i2l4, i2l5, i3l1, i3l2, i3l3, i3l4, i3l5, i4l1, i4l2, i4l3, i4l4, i4l5, i5l1, i5l2, i5l3, i5l4, i5l5;
+
     @FXML
     public void iniciarPartida() {
 
@@ -90,7 +91,7 @@ public class WordleController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        casillaSeleccionada=i1l1;
+        casillaSeleccionada = i1l1;
         casillaSeleccionada.getStyleClass().add("activa");
         palabraOculta = obtenerPalabraAleatoria("src/main/resources/palabras.txt");
         iniciarPartida();
@@ -147,7 +148,7 @@ public class WordleController implements Initializable {
         i5l5.getStyleClass().remove("activa");
     }
 
-    public void seleccionar(MouseEvent event){
+    public void seleccionar(MouseEvent event) {
         casillaSeleccionada = (Label) event.getSource();
         desmarcarTodas();
         casillaSeleccionada.getStyleClass().add("activa");
@@ -209,6 +210,7 @@ public class WordleController implements Initializable {
 
     @FXML
     public void comprobarPalabra(ActionEvent event) {
+        // Verifica si todas las casillas de la fila actual están completas
         boolean filaCompleta = true;
         for (int col = 1; col <= 5; col++) {
             String casillaId = "i" + filaActual + "l" + col;
@@ -218,11 +220,16 @@ public class WordleController implements Initializable {
                 break;
             }
         }
+
+        // Si la fila actual no está completa, muestra un mensaje de advertencia
         if (!filaCompleta) {
             System.out.println("Por favor, completa todas las casillas de la fila actual antes de comprobar la palabra.");
             return; // Salimos del método ya que no se cumplen los requisitos
         }
 
+        // Si la fila está completa, procedemos con la comprobación de la palabra
+
+        // Inicializa la palabra introducida por el usuario
         StringBuilder palabraIntroducida = new StringBuilder();
         for (int col = 1; col <= 5; col++) {
             String casillaId = "i" + filaActual + "l" + col;
@@ -234,6 +241,10 @@ public class WordleController implements Initializable {
         String palabraUsuario = palabraIntroducida.toString().toUpperCase();
         boolean adivinoPalabra = true;
 
+        // Array para llevar un seguimiento de las letras de la palabra oculta que ya han sido usadas
+        boolean[] letrasUsadas = new boolean[5];
+
+        // Primer pase: marcar letras correctas
         for (int col = 0; col < 5; col++) {
             String casillaId = "i" + filaActual + "l" + (col + 1);
             Label casilla = (Label) tablero.lookup("#" + casillaId);
@@ -244,22 +255,43 @@ public class WordleController implements Initializable {
                 // Si la letra coincide exactamente en la posición correcta, cambia a "correcta"
                 casilla.getStyleClass().removeAll("normal", "existe");
                 casilla.getStyleClass().add("correcta");
-            } else if (palabraOculta.contains(String.valueOf(letraUsuario))) {
-                // Si la letra está en la palabra oculta pero no en la posición correcta, cambia a "existe"
-                casilla.getStyleClass().removeAll("normal", "correcta");
-                casilla.getStyleClass().add("existe");
-                adivinoPalabra = false;
+                letrasUsadas[col] = true; // Marca la letra como usada
             } else {
-                casilla.getStyleClass().removeAll("existe", "correcta");
-                casilla.getStyleClass().add("normal");
                 adivinoPalabra = false;
             }
         }
 
+        // Segundo pase: marcar letras existentes pero no en la posición correcta
+        for (int col = 0; col < 5; col++) {
+            String casillaId = "i" + filaActual + "l" + (col + 1);
+            Label casilla = (Label) tablero.lookup("#" + casillaId);
+            char letraUsuario = palabraUsuario.charAt(col);
+
+            if (!casilla.getStyleClass().contains("correcta")) {
+                boolean letraEncontrada = false;
+                for (int i = 0; i < 5; i++) {
+                    if (!letrasUsadas[i] && palabraOculta.charAt(i) == letraUsuario) {
+                        letraEncontrada = true;
+                        letrasUsadas[i] = true; // Marca la letra como usada
+                        break;
+                    }
+                }
+
+                if (letraEncontrada) {
+                    casilla.getStyleClass().removeAll("normal", "correcta");
+                    casilla.getStyleClass().add("existe");
+                } else {
+                    casilla.getStyleClass().removeAll("existe", "correcta");
+                    casilla.getStyleClass().add("normal");
+                }
+            }
+        }
+
         if (adivinoPalabra) {
-            info.ganar();
-            desactivarTodasLasCasillas();
+            info.ganar(); // Llama al método ganar si el usuario ha adivinado la palabra
+            desactivarTodasLasCasillas(); // Desactiva todas las casillas si se adivina la palabra
         } else if (filaActual == 5) {
+            // Si es el último intento y la palabra no es adivinada, desactiva las casillas de la última fila y llama a perder
             desactivarCasillasFila(filaActual);
             info.perder();
         } else {
@@ -269,6 +301,7 @@ public class WordleController implements Initializable {
 
                 Node siguienteCasilla = tablero.lookup("#" + nuevoId);
                 if (siguienteCasilla instanceof Label) {
+                    // Remueve la clase 'activa' de la casilla seleccionada actual
                     if (casillaSeleccionada != null) {
                         casillaSeleccionada.getStyleClass().remove("activa");
                     }
@@ -278,6 +311,7 @@ public class WordleController implements Initializable {
             }
         }
     }
+
 
     private void desactivarCasillasFila(int fila) {
         for (int col = 1; col <= 5; col++) {
