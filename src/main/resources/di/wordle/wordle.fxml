@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
@@ -326,15 +325,16 @@
       </VBox>
       <VBox layoutX="120.0" layoutY="693.0" prefHeight="60.0" prefWidth="500.0">
          <children>
-            <GridPane focusTraversable="true" prefHeight="60.0" prefWidth="438.0">
+            <GridPane focusTraversable="true" prefHeight="222.0" prefWidth="406.0">
                <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="73.0" minWidth="10.0" prefWidth="58.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="78.0" minWidth="10.0" prefWidth="58.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="75.0" minWidth="10.0" prefWidth="59.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="91.0" minWidth="10.0" prefWidth="57.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="96.0" minWidth="10.0" prefWidth="58.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="173.0" minWidth="10.0" prefWidth="60.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="160.0" minWidth="10.0" prefWidth="155.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="110.0" prefWidth="0.0" />
                </columnConstraints>
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -380,33 +380,30 @@
                         <Font size="17.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="58.0" maxWidth="70.0" minHeight="8.0" minWidth="23.0" mnemonicParsing="false" onAction="#borrar" prefHeight="53.0" prefWidth="65.0" style="-fx-background-color: gray; -fx-background-radius: 10;" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="6">
+                  <Button alignment="CENTER" contentDisplay="CENTER" maxHeight="58.0" maxWidth="84.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onAction="#comprobarPalabra" prefHeight="58.0" prefWidth="84.0" style="-fx-background-color: green; -fx-background-radius: 10;" text="Enviar" textAlignment="CENTER" textFill="WHITE" GridPane.columnIndex="7">
                      <font>
                         <Font size="17.0" />
                      </font>
-                     <graphic>
-                        <ImageView fitHeight="48.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@../../img/retroceso.png" />
-                           </image>
-                        </ImageView>
-                     </graphic>
-                     <GridPane.margin>
-                        <Insets left="60.0" />
-                     </GridPane.margin>
                   </Button>
                </children>
             </GridPane>
          </children>
       </VBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="27.0" layoutY="694.0" maxHeight="58.0" maxWidth="84.0" minHeight="35.0" minWidth="35.0" mnemonicParsing="false" onAction="#comprobarPalabra" prefHeight="58.0" prefWidth="84.0" style="-fx-background-color: gray; -fx-background-radius: 10;" text="Enviar" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
       <VBox layoutX="-5.0" layoutY="188.0" prefHeight="282.0" prefWidth="100.0">
          <Resultado fx:id="info"/>
       </VBox>
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="697.0" maxHeight="58.0" maxWidth="70.0" minHeight="8.0" minWidth="23.0" mnemonicParsing="false" onAction="#borrar" prefHeight="53.0" prefWidth="65.0" style="-fx-background-color: red; -fx-background-radius: 10;" textAlignment="CENTER" textFill="WHITE">
+         <font>
+            <Font size="17.0" />
+         </font>
+         <graphic>
+            <ImageView fitHeight="48.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../img/retroceso.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
    <stylesheets>
       <URL value="@letras.css" />

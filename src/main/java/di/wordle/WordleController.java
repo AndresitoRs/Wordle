@@ -89,7 +89,7 @@ public class WordleController implements Initializable {
         casillaSeleccionada=i1l1;
         casillaSeleccionada.getStyleClass().add("activa");
         iniciarPartida();
-        info.ganar();
+        info.limpiar();
     }
 
     public void desmarcarTodas() {
@@ -187,7 +187,6 @@ public class WordleController implements Initializable {
 
     @FXML
     public void comprobarPalabra(ActionEvent event) {
-        // Verifica si todas las casillas de la fila actual están completas
         boolean filaCompleta = true;
         for (int col = 1; col <= 5; col++) {
             String casillaId = "i" + filaActual + "l" + col;
@@ -197,15 +196,9 @@ public class WordleController implements Initializable {
                 break;
             }
         }
-
-        // Si la fila actual no está completa, muestra un mensaje de advertencia
         if (!filaCompleta) {
-            Alert faltanletras = new Alert(Alert.AlertType.INFORMATION);
-            faltanletras.setTitle("Ojo");
-            faltanletras.setHeaderText("Aviso");
-            faltanletras.setContentText("Por favor, completa todas las casillas de la fila actual antes de comprobar la palabra.");
-            faltanletras.showAndWait();
-            return;
+            System.out.println("Por favor, completa todas las casillas de la fila actual antes de comprobar la palabra.");
+            return; // Salimos del método ya que no se cumplen los requisitos
         }
 
         StringBuilder palabraIntroducida = new StringBuilder();
@@ -217,6 +210,7 @@ public class WordleController implements Initializable {
 
         String palabraOculta = this.palabraOculta.toUpperCase();
         String palabraUsuario = palabraIntroducida.toString().toUpperCase();
+        boolean adivinoPalabra = true;
 
         for (int col = 0; col < 5; col++) {
             String casillaId = "i" + filaActual + "l" + (col + 1);
@@ -225,33 +219,55 @@ public class WordleController implements Initializable {
             char letraOculta = palabraOculta.charAt(col);
 
             if (letraUsuario == letraOculta) {
+                // Si la letra coincide exactamente en la posición correcta, cambia a "correcta"
                 casilla.getStyleClass().removeAll("normal", "existe");
                 casilla.getStyleClass().add("correcta");
             } else if (palabraOculta.contains(String.valueOf(letraUsuario))) {
+                // Si la letra está en la palabra oculta pero no en la posición correcta, cambia a "existe"
                 casilla.getStyleClass().removeAll("normal", "correcta");
                 casilla.getStyleClass().add("existe");
+                adivinoPalabra = false;
             } else {
                 casilla.getStyleClass().removeAll("existe", "correcta");
                 casilla.getStyleClass().add("normal");
+                adivinoPalabra = false;
             }
         }
-        filaActual++;
-        if (filaActual <= 5) {
-            String nuevoId = "i" + filaActual + "l1";
 
-            Node siguienteCasilla = tablero.lookup("#" + nuevoId);
-            if (siguienteCasilla instanceof Label) {
-                if (casillaSeleccionada != null) {
-                    casillaSeleccionada.getStyleClass().remove("activa");
-                }
-                casillaSeleccionada = (Label) siguienteCasilla;
-                casillaSeleccionada.getStyleClass().add("activa");
-            }
+        if (adivinoPalabra) {
+            info.ganar();
+            desactivarTodasLasCasillas();
+        } else if (filaActual == 5) {
+            desactivarCasillasFila(filaActual);
+            info.perder();
         } else {
-            if (casillaSeleccionada != null) {
-                casillaSeleccionada.getStyleClass().remove("activa");
-                casillaSeleccionada = null;
+            filaActual++;
+            if (filaActual <= 5) {
+                String nuevoId = "i" + filaActual + "l1";
+
+                Node siguienteCasilla = tablero.lookup("#" + nuevoId);
+                if (siguienteCasilla instanceof Label) {
+                    if (casillaSeleccionada != null) {
+                        casillaSeleccionada.getStyleClass().remove("activa");
+                    }
+                    casillaSeleccionada = (Label) siguienteCasilla;
+                    casillaSeleccionada.getStyleClass().add("activa");
+                }
             }
+        }
+    }
+
+    private void desactivarCasillasFila(int fila) {
+        for (int col = 1; col <= 5; col++) {
+            String casillaId = "i" + fila + "l" + col;
+            Label casilla = (Label) tablero.lookup("#" + casillaId);
+            casilla.setDisable(true);
+        }
+    }
+
+    private void desactivarTodasLasCasillas() {
+        for (int fila = 1; fila <= 5; fila++) {
+            desactivarCasillasFila(fila);
         }
     }
 }
