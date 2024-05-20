@@ -10,14 +10,18 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class WordleController implements Initializable {
 
     @FXML
     Resultado info;
-    private final String palabraOculta = "Caleb";
+    private String palabraOculta;
     private int filaActual = 1;
     private Label casillaSeleccionada;
     @FXML
@@ -88,8 +92,26 @@ public class WordleController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         casillaSeleccionada=i1l1;
         casillaSeleccionada.getStyleClass().add("activa");
+        palabraOculta = obtenerPalabraAleatoria("src/main/resources/palabras.txt");
         iniciarPartida();
         info.limpiar();
+    }
+
+    private String obtenerPalabraAleatoria(String rutaFichero) {
+        try {
+            // Lee todo el contenido del fichero
+            String contenido = new String(Files.readAllBytes(Paths.get(rutaFichero)));
+            // Separa las palabras por espacios
+            String[] palabras = contenido.split(" ");
+            // Selecciona una palabra aleatoria
+            Random random = new Random();
+            int indiceAleatorio = random.nextInt(palabras.length);
+            return palabras[indiceAleatorio];
+        } catch (IOException e) {
+            e.printStackTrace();
+            // En caso de error, devuelve una palabra por defecto
+            return "ERROR";
+        }
     }
 
     public void desmarcarTodas() {
