@@ -25,3 +25,43 @@
     -fx-border-width: 1!important;
 }
 
+
+.btnplay {
+    -fx-background-color: #FFA500; /* Color de fondo naranja */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-padding: 10px 20px; /* Espaciado interno */
+    -fx-font-size: 14px; /* Tamaño del texto */
+    -fx-border-radius: 5px; /* Bordes redondeados */
+    -fx-background-radius: 5px; /* Bordes de fondo redondeados */
+    -fx-cursor: hand; /* Cambia el cursor al pasar por encima */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0); /* Sombra */
+}
+
+.btnplay:hover {
+    -fx-background-color: #FF8C00; /* Color de fondo al pasar el ratón */
+}
+
+.btnplay:pressed {
+    -fx-background-color: #FF7F50; /* Color de fondo al hacer clic */
+}
+
+
+.btnexit {
+    -fx-background-color: #00BFFF; /* Color de fondo azul celeste */
+    -fx-text-fill: white; /* Color del texto */
+    -fx-padding: 10px 20px; /* Espaciado interno */
+    -fx-font-size: 14px; /* Tamaño del texto */
+    -fx-border-radius: 5px; /* Bordes redondeados */
+    -fx-background-radius: 5px; /* Bordes de fondo redondeados */
+    -fx-cursor: hand; /* Cambia el cursor al pasar por encima */
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.5), 10, 0.5, 0, 0); /* Sombra */
+}
+
+.btnexit:hover {
+    -fx-background-color: #1E90FF; /* Color de fondo al pasar el ratón */
+}
+
+.btnexit:pressed {
+    -fx-background-color: #1C86EE; /* Color de fondo al hacer clic */
+}
+

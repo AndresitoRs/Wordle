@@ -10,6 +10,7 @@ import java.io.IOException;
 public class Resultado extends AnchorPane {
 
     private ControladorResultado controlador;
+    private WordleController controlador2;
 
     public Resultado(){
         super();
@@ -27,11 +28,13 @@ public class Resultado extends AnchorPane {
     public void ganar() {
         Image img = new Image(getClass().getResourceAsStream("/img/tuganas.png"));
         controlador.getImagen().setImage(img);
+
     }
 
     public void perder() {
         Image img = new Image(getClass().getResourceAsStream("/img/juegoterminado.png"));
         controlador.getImagen().setImage(img);
+
     }
 
 

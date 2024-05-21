@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -19,6 +20,10 @@ import java.util.ResourceBundle;
 
 public class WordleController implements Initializable {
 
+    @FXML
+    private Button bplay;
+    @FXML
+    private Button bexit;
     @FXML
     Resultado info;
     private String palabraOculta;
@@ -89,12 +94,19 @@ public class WordleController implements Initializable {
         i5l5.setOnMouseClicked(this::seleccionar);
     }
 
+    public void mostrarBotonesFinal() {
+        bplay.setVisible(true);
+        bexit.setVisible(true);
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         casillaSeleccionada = i1l1;
         casillaSeleccionada.getStyleClass().add("activa");
         palabraOculta = obtenerPalabraAleatoria("src/main/resources/palabras.txt");
         iniciarPartida();
+        bplay.setVisible(false);
+        bexit.setVisible(false);
         info.limpiar();
     }
 
@@ -290,10 +302,12 @@ public class WordleController implements Initializable {
         if (adivinoPalabra) {
             info.ganar(); // Llama al método ganar si el usuario ha adivinado la palabra
             desactivarTodasLasCasillas(); // Desactiva todas las casillas si se adivina la palabra
+            mostrarBotonesFinal();
         } else if (filaActual == 5) {
             // Si es el último intento y la palabra no es adivinada, desactiva las casillas de la última fila y llama a perder
             desactivarCasillasFila(filaActual);
             info.perder();
+            mostrarBotonesFinal();
         } else {
             filaActual++;
             if (filaActual <= 5) {
@@ -311,8 +325,6 @@ public class WordleController implements Initializable {
             }
         }
     }
-
-
     private void desactivarCasillasFila(int fila) {
         for (int col = 1; col <= 5; col++) {
             String casillaId = "i" + fila + "l" + col;
@@ -325,5 +337,32 @@ public class WordleController implements Initializable {
         for (int fila = 1; fila <= 5; fila++) {
             desactivarCasillasFila(fila);
         }
+    }
+
+    @FXML
+    private void reiniciarPartida() {
+        // Restablece todas las casillas a su estado inicial
+        for (int fila = 1; fila <= 5; fila++) {
+            for (int col = 1; col <= 5; col++) {
+                String casillaId = "i" + fila + "l" + col;
+                Label casilla = (Label) tablero.lookup("#" + casillaId);
+                casilla.setText("");
+                casilla.getStyleClass().removeAll("activa", "correcta", "existe", "normal");
+                casilla.setDisable(false); // Habilita todas las casillas
+            }
+        }
+        casillaSeleccionada = (Label) tablero.lookup("#i1l1");
+        casillaSeleccionada.getStyleClass().add("activa");
+        filaActual = 1;
+        palabraOculta = obtenerPalabraAleatoria("src/main/resources/palabras.txt");
+        iniciarPartida();
+        info.limpiar();
+        bplay.setVisible(false);
+        bexit.setVisible(false);
+    }
+
+    public void salir(ActionEvent event) {
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.close();
     }
 }

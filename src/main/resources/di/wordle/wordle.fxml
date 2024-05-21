@@ -14,19 +14,19 @@
 <?import javafx.scene.text.Font?>
 
 <?import di.wordle.Resultado?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="806.0" prefWidth="626.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="di.wordle.WordleController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="di.wordle.WordleController">
    <children>
-      <AnchorPane layoutX="-5.0" prefHeight="64.0" prefWidth="631.0" style="-fx-background-color: white;">
+      <AnchorPane layoutX="-5.0" prefHeight="64.0" prefWidth="800.0" style="-fx-background-color: white;">
          <children>
-            <Label layoutX="166.0" layoutY="9.0" text="La Palabra del Día">
+            <Label layoutX="249.0" layoutY="15.0" text="La Palabra del Día">
                <font>
                   <Font name="System Bold" size="36.0" />
                </font>
             </Label>
-            <Separator layoutX="7.0" layoutY="61.0" prefHeight="10.0" prefWidth="620.0" />
+            <Separator layoutX="7.0" layoutY="61.0" prefHeight="22.0" prefWidth="790.0" />
          </children>
       </AnchorPane>
-      <VBox layoutX="156.0" layoutY="149.0" prefHeight="360.0" prefWidth="329.0">
+      <VBox layoutX="231.0" layoutY="160.0" prefHeight="360.0" prefWidth="329.0">
          <children>
             <GridPane fx:id="tablero" hgap="10.0" prefHeight="359.0" prefWidth="337.0" style="-fx-border-radius: 40;" vgap="10.0">
               <columnConstraints>
@@ -173,7 +173,7 @@
             </GridPane>
          </children>
       </VBox>
-      <VBox layoutX="56.0" layoutY="561.0" prefHeight="60.0" prefWidth="528.0">
+      <VBox layoutX="145.0" layoutY="557.0" prefHeight="60.0" prefWidth="528.0">
          <children>
             <GridPane prefHeight="222.0" prefWidth="406.0">
               <columnConstraints>
@@ -251,7 +251,7 @@
             </GridPane>
          </children>
       </VBox>
-      <VBox layoutX="84.0" layoutY="627.0" prefHeight="60.0" prefWidth="500.0">
+      <VBox layoutX="170.0" layoutY="624.0" prefHeight="60.0" prefWidth="500.0">
          <children>
             <GridPane focusTraversable="true" prefHeight="222.0" prefWidth="406.0">
                <columnConstraints>
@@ -323,7 +323,7 @@
             </GridPane>
          </children>
       </VBox>
-      <VBox layoutX="120.0" layoutY="693.0" prefHeight="60.0" prefWidth="500.0">
+      <VBox layoutX="199.0" layoutY="689.0" prefHeight="60.0" prefWidth="500.0">
          <children>
             <GridPane focusTraversable="true" prefHeight="222.0" prefWidth="406.0">
                <columnConstraints>
@@ -389,10 +389,10 @@
             </GridPane>
          </children>
       </VBox>
-      <VBox layoutX="-5.0" layoutY="188.0" prefHeight="282.0" prefWidth="100.0">
-         <Resultado fx:id="info"/>
+      <VBox layoutX="45.0" layoutY="221.0" prefHeight="282.0" prefWidth="100.0">
+         <Resultado fx:id="info"></Resultado>
       </VBox>
-      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="45.0" layoutY="697.0" maxHeight="58.0" maxWidth="70.0" minHeight="8.0" minWidth="23.0" mnemonicParsing="false" onAction="#borrar" prefHeight="53.0" prefWidth="65.0" style="-fx-background-color: red; -fx-background-radius: 10;" textAlignment="CENTER" textFill="WHITE">
+      <Button alignment="CENTER" contentDisplay="CENTER" layoutX="108.0" layoutY="690.0" maxHeight="58.0" maxWidth="75.0" minHeight="8.0" minWidth="23.0" mnemonicParsing="false" onAction="#borrar" prefHeight="58.0" prefWidth="75.0" style="-fx-background-color: red; -fx-background-radius: 10;" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font size="17.0" />
          </font>
@@ -404,6 +404,8 @@
             </ImageView>
          </graphic>
       </Button>
+      <Button fx:id="bplay" layoutX="647.0" layoutY="269.0" mnemonicParsing="false" onAction="#reiniciarPartida" prefHeight="44.0" prefWidth="138.0" styleClass="btnplay" text="Jugar de nuevo" />
+      <Button fx:id="bexit" layoutX="647.0" layoutY="340.0" mnemonicParsing="false" onAction="#salir" prefHeight="44.0" prefWidth="138.0" styleClass="btnexit" text="Salir del juego" />
    </children>
    <stylesheets>
       <URL value="@letras.css" />
