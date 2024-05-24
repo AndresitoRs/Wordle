@@ -9,18 +9,21 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ControladorMenu {
+public class ControladorMenu  {
 
     private HostServices hostServices;
-
     @FXML
-    AnchorPane fondo;
+    private AnchorPane fondo;
 
     public void setHostServices(HostServices hostServices) {
         this.hostServices = hostServices;
@@ -39,8 +42,6 @@ public class ControladorMenu {
             System.out.println("HostServices no está disponible.");
         }
     }
-
-
 
     public void cargarPantalla(String pantalla) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(WordleApp.class.getResource(pantalla));

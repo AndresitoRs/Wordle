@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 
 <?import di.wordle.Resultado?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="di.wordle.WordleController">
+<AnchorPane fx:id="fondo" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="808.0" prefWidth="797.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="di.wordle.WordleController">
    <children>
       <AnchorPane layoutX="-5.0" prefHeight="64.0" prefWidth="800.0" style="-fx-background-color: white;">
          <children>
@@ -405,7 +405,7 @@
          </graphic>
       </Button>
       <Button fx:id="bplay" layoutX="647.0" layoutY="269.0" mnemonicParsing="false" onAction="#reiniciarPartida" prefHeight="44.0" prefWidth="138.0" styleClass="btnplay" text="Jugar de nuevo" />
-      <Button fx:id="bexit" layoutX="647.0" layoutY="340.0" mnemonicParsing="false" onAction="#salir" prefHeight="44.0" prefWidth="138.0" styleClass="btnexit" text="Salir del juego" />
+      <Button fx:id="bexit" layoutX="647.0" layoutY="340.0" mnemonicParsing="false" onAction="#volverMenu" prefHeight="44.0" prefWidth="138.0" styleClass="btnexit" text="Salir al menu" />
    </children>
    <stylesheets>
       <URL value="@letras.css" />
