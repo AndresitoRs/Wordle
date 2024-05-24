@@ -10,8 +10,10 @@ import java.io.IOException;
 public class WordleApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(WordleApp.class.getResource("wordle.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 800, 805);
+        FXMLLoader fxmlLoader = new FXMLLoader(WordleApp.class.getResource("menu.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 500, 600);
+        ControladorMenu controlador = fxmlLoader.getController();
+        controlador.setHostServices(getHostServices());
         stage.setTitle("Wordle");
         stage.setScene(scene);
         stage.show();
