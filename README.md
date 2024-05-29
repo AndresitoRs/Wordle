@@ -1,6 +1,6 @@
 # Mi Proyecto Wordle
 
-Este es un proyecto de un juego de Wordle desarrollado en JavaFX.
+Este es un proyecto de un juego de Wordle desarrollado en JavaFX con las librerias de Mavem y Junit.
 
 ## Instalación
 Clona el repositorio y abre el proyecto con tu IDE favorito.
@@ -54,7 +54,9 @@ Se desplegará el menú inicial nada más comenzar con sus tres opciones básica
           o salir ya detallados antes, ya que no ha estado fino en este intento, deberá tener más cuidado para la próxima vez e intentar afinar su instinto.
 
           
+----------------------------------------------------------------------------
 
+Fin de la documentación del Readme.
       
 
       
