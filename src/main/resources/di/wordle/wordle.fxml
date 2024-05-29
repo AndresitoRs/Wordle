@@ -399,7 +399,7 @@
          <graphic>
             <ImageView fitHeight="48.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../img/retroceso.png" />
+                  <Image url="@img/retroceso.png" />
                </image>
             </ImageView>
          </graphic>

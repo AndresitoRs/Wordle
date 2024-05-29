@@ -26,13 +26,13 @@ public class Resultado extends AnchorPane {
     }
 
     public void ganar() {
-        Image img = new Image(getClass().getResourceAsStream("/img/tuganas.png"));
+        Image img = new Image(getClass().getResourceAsStream("/di/wordle/img/tuganas.png"));
         controlador.getImagen().setImage(img);
 
     }
 
     public void perder() {
-        Image img = new Image(getClass().getResourceAsStream("/img/juegoterminado.png"));
+        Image img = new Image(getClass().getResourceAsStream("/di/wordle/img/juegoterminado.png"));
         controlador.getImagen().setImage(img);
 
     }

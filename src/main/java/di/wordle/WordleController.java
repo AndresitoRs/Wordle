@@ -18,8 +18,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 public class WordleController implements Initializable {
 
@@ -117,25 +120,35 @@ public class WordleController implements Initializable {
         casillaSeleccionada = i1l1;
         casillaSeleccionada.getStyleClass().add("activa");
         palabraOculta = obtenerPalabraAleatoria("src/main/resources/palabras.txt");
+        System.out.println(palabraOculta);
         iniciarPartida();
         bplay.setVisible(false);
         bexit.setVisible(false);
         info.limpiar();
+        URL ruta = getClass().getResource("img/fondo.png");
+        String estilo = "-fx-background-image:url('"+ruta+"')";
+        fondo.setStyle(estilo);
     }
 
     private String obtenerPalabraAleatoria(String rutaFichero) {
         try {
             // Lee todo el contenido del fichero
             String contenido = new String(Files.readAllBytes(Paths.get(rutaFichero)));
-            // Separa las palabras por espacios
-            String[] palabras = contenido.split(" ");
+            // Separa las palabras por cualquier cantidad de espacios o saltos de línea
+            String[] palabras = contenido.split("\\s+");
+            // Filtra palabras de exactamente 5 letras
+            List<String> palabrasFiltradas = Arrays.stream(palabras)
+                    .filter(p -> p.length() == 5)
+                    .collect(Collectors.toList());
+            if (palabrasFiltradas.isEmpty()) {
+                return "ERROR"; // No hay palabras de 5 letras
+            }
             // Selecciona una palabra aleatoria
             Random random = new Random();
-            int indiceAleatorio = random.nextInt(palabras.length);
-            return palabras[indiceAleatorio];
+            int indiceAleatorio = random.nextInt(palabrasFiltradas.size());
+            return palabrasFiltradas.get(indiceAleatorio);
         } catch (IOException e) {
             e.printStackTrace();
-            // En caso de error, devuelve una palabra por defecto
             return "ERROR";
         }
     }
@@ -252,9 +265,6 @@ public class WordleController implements Initializable {
             return; // Salimos del método ya que no se cumplen los requisitos
         }
 
-        // Si la fila está completa, procedemos con la comprobación de la palabra
-
-        // Inicializa la palabra introducida por el usuario
         StringBuilder palabraIntroducida = new StringBuilder();
         for (int col = 1; col <= 5; col++) {
             String casillaId = "i" + filaActual + "l" + col;
@@ -269,7 +279,6 @@ public class WordleController implements Initializable {
         // Array para llevar un seguimiento de las letras de la palabra oculta que ya han sido usadas
         boolean[] letrasUsadas = new boolean[5];
 
-        // Primer pase: marcar letras correctas
         for (int col = 0; col < 5; col++) {
             String casillaId = "i" + filaActual + "l" + (col + 1);
             Label casilla = (Label) tablero.lookup("#" + casillaId);
@@ -325,10 +334,8 @@ public class WordleController implements Initializable {
             filaActual++;
             if (filaActual <= 5) {
                 String nuevoId = "i" + filaActual + "l1";
-
                 Node siguienteCasilla = tablero.lookup("#" + nuevoId);
                 if (siguienteCasilla instanceof Label) {
-                    // Remueve la clase 'activa' de la casilla seleccionada actual
                     if (casillaSeleccionada != null) {
                         casillaSeleccionada.getStyleClass().remove("activa");
                     }
