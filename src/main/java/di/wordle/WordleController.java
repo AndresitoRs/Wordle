@@ -261,7 +261,12 @@ public class WordleController implements Initializable {
 
         // Si la fila actual no está completa, muestra un mensaje de advertencia
         if (!filaCompleta) {
-            System.out.println("Por favor, completa todas las casillas de la fila actual antes de comprobar la palabra.");
+            Alert alertaInfo = new Alert(Alert.AlertType.INFORMATION);
+            alertaInfo.setTitle("Ojo");
+            alertaInfo.setHeaderText("Cuidado");
+            alertaInfo.setContentText("Sus filas no están completadas, o esta usted haciendo trampas, así que por favor, " +
+                    "completa todas las casillas de la fila actual antes de comprobar la palabra o deje de intentar hacer trampa.");
+            alertaInfo.showAndWait();
             return; // Salimos del método ya que no se cumplen los requisitos
         }
 
@@ -323,9 +328,19 @@ public class WordleController implements Initializable {
 
         if (adivinoPalabra) {
             info.ganar(); // Llama al método ganar si el usuario ha adivinado la palabra
+            Alert alertaGanar = new Alert(Alert.AlertType.CONFIRMATION);
+            alertaGanar.setTitle("Felicidades");
+            alertaGanar.setHeaderText("Victoria");
+            alertaGanar.setContentText("Buen trabajo, le he visto fino");
+            alertaGanar.showAndWait();
             desactivarTodasLasCasillas(); // Desactiva todas las casillas si se adivina la palabra
             mostrarBotonesFinal();
         } else if (filaActual == 5) {
+            Alert alertaPerder = new Alert(Alert.AlertType.ERROR);
+            alertaPerder.setTitle("Una pena");
+            alertaPerder.setHeaderText("Derrota");
+            alertaPerder.setContentText("Ha perdido tras gastar sus intentos, la palabra era: " +palabraOculta);
+            alertaPerder.showAndWait();
             // Si es el último intento y la palabra no es adivinada, desactiva las casillas de la última fila y llama a perder
             desactivarCasillasFila(filaActual);
             info.perder();
@@ -375,6 +390,7 @@ public class WordleController implements Initializable {
         casillaSeleccionada.getStyleClass().add("activa");
         filaActual = 1;
         palabraOculta = obtenerPalabraAleatoria("src/main/resources/palabras.txt");
+        System.out.println(palabraOculta);
         iniciarPartida();
         info.limpiar();
         bplay.setVisible(false);
